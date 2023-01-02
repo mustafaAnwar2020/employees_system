@@ -54,13 +54,13 @@ class User extends Authenticatable
      */
     public function job(): HasOne
     {
-        return $this->hasOne(Job::class, 'job_id');
+        return $this->hasOne(Job::class,'id','job_id');
     }
 
 
     public function department(): HasOne
     {
-        return $this->hasOne(Department::class, 'department_id');
+        return $this->hasOne(Department::class, 'id','department_id');
     }
 
 }

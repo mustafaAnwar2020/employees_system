@@ -4,8 +4,8 @@ namespace App\Models;
 
 use App\Models\JobData;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Job extends Model
 {
@@ -13,8 +13,8 @@ class Job extends Model
     protected $table='jobs';
     protected $fillable = ['department_id'];
 
-    public function data(): HasMany
+    public function data(): HasOne
     {
-        return $this->hasMany(JobData::class, 'job_id', 'id');
+        return $this->hasOne(JobData::class, 'job_id', 'id');
     }
 }

@@ -4,8 +4,8 @@ namespace App\Models;
 
 use App\Models\DepartmentData;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Department extends Model
 {
@@ -13,10 +13,10 @@ class Department extends Model
     protected $table='department';
     protected $fillable = ['parent_id'];
 
-    
-    public function data(): HasMany
+
+    public function data(): HasOne
     {
-        return $this->hasMany(DepartmentData::class, 'department_id', 'id');
+        return $this->hasOne(DepartmentData::class, 'department_id', 'id');
     }
 
 }
