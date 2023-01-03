@@ -1,20 +1,24 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Http\Requests\CreateIndexRequest;
+use App\Repositories\IndexRepository;
 
-use Illuminate\Http\Request;
-use App\Models\User;
 class ReportController extends Controller
 {
-    public function index(){
-        $users = User::query()
-            ->with([
-                'job.data','department.data'
-                ])
-            ->get();
+    private $repository;
 
-        return view('reports.index')->with([
-            'users'=>$users
-        ]);
+    public function __construct(IndexRepository $repository)
+    {
+        $this->repository = $repository;
+    }
+
+    public function index(CreateIndexRequest $request){
+
+        $request->validated();
+
+        $data = $this->repository->getData($request);
+
+        return view('reports.index')->with($data);
     }
 }
