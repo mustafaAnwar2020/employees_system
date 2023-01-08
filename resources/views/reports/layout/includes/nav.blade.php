@@ -11,5 +11,9 @@
         <li class="nav-item d-none d-sm-inline-block">
             <a href="{{route('jobs.index')}}" class="nav-link">Jobs</a>
         </li>
+
+        <li class="nav-item d-none d-sm-inline-block">
+            <a href="{{route('departments.index')}}" class="nav-link">Departments</a>
+        </li>
     </ul>
 </nav>
