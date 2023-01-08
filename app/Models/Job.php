@@ -17,4 +17,10 @@ class Job extends Model
     {
         return $this->hasOne(JobData::class, 'job_id', 'id');
     }
+
+
+    public function department()
+    {
+        return $this->belongsTo(Department::class);
+    }
 }

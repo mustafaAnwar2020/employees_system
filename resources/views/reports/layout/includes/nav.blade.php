@@ -7,5 +7,9 @@
         <li class="nav-item d-none d-sm-inline-block">
             <a href="{{route('report.index')}}" class="nav-link">Report</a>
         </li>
+
+        <li class="nav-item d-none d-sm-inline-block">
+            <a href="{{route('jobs.index')}}" class="nav-link">Jobs</a>
+        </li>
     </ul>
 </nav>

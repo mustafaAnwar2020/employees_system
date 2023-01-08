@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ReportController;
+use App\Http\Controllers\JobController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -19,3 +20,5 @@ Route::get('/', function () {
 
 Route::get('/report',[ReportController::class,'index'])
     ->name('report.index');
+
+Route::resource('/jobs',JobController::class)->except(['show']);
