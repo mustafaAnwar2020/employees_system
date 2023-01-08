@@ -3,10 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Job;
-use App\Models\Department;
-use Illuminate\Http\Request;
 use App\Http\Requests\JobCreateRequest;
-use App\Models\JobData;
 use App\Repositories\JobRepository;
 
 class JobController extends Controller

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 04, 2023 at 07:44 PM
+-- Generation Time: Jan 08, 2023 at 10:17 PM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 7.4.26
 
@@ -32,7 +32,7 @@ CREATE TABLE `department` (
   `parent_id` int(11) UNSIGNED DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp()
-) ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `department`
@@ -47,15 +47,9 @@ INSERT INTO `department` (`id`, `parent_id`, `created_at`, `updated_at`) VALUES
 (6, 3, '2023-01-02 19:15:32', '2023-01-02 19:15:32'),
 (7, 3, '2023-01-02 19:15:32', '2023-01-02 19:15:32'),
 (8, 3, '2023-01-02 19:15:32', '2023-01-02 19:15:32'),
-(10, NULL, '2023-01-04 18:32:57', '2023-01-04 18:32:57');
-
---
--- Triggers `department`
---
-DELIMITER $$
-CREATE TRIGGER `add_job_after_department` AFTER INSERT ON `department` FOR EACH ROW INSERT INTO `department_data` (department_id,Title) VALUES(NEW.id,'test trigger')
-$$
-DELIMITER ;
+(11, 1, '2023-01-08 17:53:36', '2023-01-08 18:17:37'),
+(12, NULL, '2023-01-08 18:11:52', '2023-01-08 18:11:52'),
+(13, 11, '2023-01-08 18:12:01', '2023-01-08 18:17:29');
 
 -- --------------------------------------------------------
 
@@ -66,11 +60,11 @@ DELIMITER ;
 CREATE TABLE `department_data` (
   `id` int(11) UNSIGNED NOT NULL,
   `department_id` int(11) UNSIGNED NOT NULL,
-  `title` varchar(255)   NOT NULL,
-  `description` varchar(255)   NOT NULL,
+  `title` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `description` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp()
-) ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `department_data`
@@ -85,7 +79,9 @@ INSERT INTO `department_data` (`id`, `department_id`, `title`, `description`, `c
 (6, 6, 'UI', 'UI', '2023-01-02 19:16:46', '2023-01-02 19:16:46'),
 (7, 7, 'Developers', 'Developers', '2023-01-02 19:16:46', '2023-01-02 19:16:46'),
 (8, 8, 'UX', 'UX', '2023-01-02 19:16:46', '2023-01-02 19:16:46'),
-(10, 10, 'test', '', '2023-01-04 18:32:57', '2023-01-04 18:32:57');
+(12, 11, 'test', 'test', '2023-01-08 17:53:36', '2023-01-08 17:53:36'),
+(13, 12, 'test1', 'test23123123', '2023-01-08 18:11:52', '2023-01-08 18:11:52'),
+(14, 13, 'test1', 'test23123123', '2023-01-08 18:12:01', '2023-01-08 18:12:01');
 
 -- --------------------------------------------------------
 
@@ -106,13 +102,13 @@ CREATE TABLE `employees_departments` (
 
 CREATE TABLE `failed_jobs` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `uuid` varchar(255)  NOT NULL,
-  `connection` text  NOT NULL,
-  `queue` text  NOT NULL,
-  `payload` longtext  NOT NULL,
-  `exception` longtext  NOT NULL,
+  `uuid` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `connection` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `queue` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `payload` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `exception` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
   `failed_at` timestamp NOT NULL DEFAULT current_timestamp()
-) ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -125,7 +121,7 @@ CREATE TABLE `jobs` (
   `department_id` int(11) UNSIGNED NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp()
-) ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `jobs`
@@ -151,11 +147,11 @@ INSERT INTO `jobs` (`id`, `department_id`, `created_at`, `updated_at`) VALUES
 CREATE TABLE `jobs_data` (
   `id` int(11) UNSIGNED NOT NULL,
   `job_id` int(11) UNSIGNED NOT NULL,
-  `title` varchar(255)   NOT NULL,
-  `description` varchar(255)   NOT NULL,
+  `title` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `description` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp()
-) ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `jobs_data`
@@ -180,9 +176,9 @@ INSERT INTO `jobs_data` (`id`, `job_id`, `title`, `description`, `created_at`, `
 
 CREATE TABLE `migrations` (
   `id` int(10) UNSIGNED NOT NULL,
-  `migration` varchar(255)  NOT NULL,
+  `migration` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `batch` int(11) NOT NULL
-) ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `migrations`
@@ -201,10 +197,10 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 --
 
 CREATE TABLE `password_resets` (
-  `email` varchar(255)  NOT NULL,
-  `token` varchar(255)  NOT NULL,
+  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `token` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL
-) ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -214,15 +210,15 @@ CREATE TABLE `password_resets` (
 
 CREATE TABLE `personal_access_tokens` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `tokenable_type` varchar(255)  NOT NULL,
+  `tokenable_type` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `tokenable_id` bigint(20) UNSIGNED NOT NULL,
-  `name` varchar(255)  NOT NULL,
-  `token` varchar(64)  NOT NULL,
-  `abilities` text  DEFAULT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `token` varchar(64) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `abilities` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `last_used_at` timestamp NULL DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -232,17 +228,17 @@ CREATE TABLE `personal_access_tokens` (
 
 CREATE TABLE `users` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `name` varchar(255)  NOT NULL,
-  `photo` varchar(255)  NOT NULL,
-  `email` varchar(255)  NOT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `photo` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `email_verified_at` timestamp NULL DEFAULT NULL,
-  `password` varchar(255)  NOT NULL,
+  `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `job_id` int(11) UNSIGNED NOT NULL,
   `department_id` int(11) UNSIGNED NOT NULL,
-  `remember_token` varchar(100)  DEFAULT NULL,
+  `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `users`
@@ -277,7 +273,7 @@ INSERT INTO `users` (`id`, `name`, `photo`, `email`, `email_verified_at`, `passw
 --
 DROP TABLE IF EXISTS `employees_departments`;
 
-CREATE VIEW `employees_departments`  AS SELECT `users`.`name` AS `name`, `department_data`.`title` AS `title` FROM (`users` join `department_data` on(`department_data`.`department_id` = `users`.`department_id`)) ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `employees_departments`  AS SELECT `users`.`name` AS `name`, `department_data`.`title` AS `title` FROM (`users` join `department_data` on(`department_data`.`department_id` = `users`.`department_id`)) ;
 
 --
 -- Indexes for dumped tables
@@ -295,7 +291,7 @@ ALTER TABLE `department`
 --
 ALTER TABLE `department_data`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `department_id` (`department_id`);
+  ADD KEY `department_data_ibfk_1` (`department_id`);
 
 --
 -- Indexes for table `failed_jobs`
@@ -309,14 +305,14 @@ ALTER TABLE `failed_jobs`
 --
 ALTER TABLE `jobs`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `department_id` (`department_id`);
+  ADD KEY `jobs_ibfk_1` (`department_id`);
 
 --
 -- Indexes for table `jobs_data`
 --
 ALTER TABLE `jobs_data`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `job_id` (`job_id`);
+  ADD KEY `jobs_data_ibfk_1` (`job_id`);
 
 --
 -- Indexes for table `migrations`
@@ -355,13 +351,13 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `department`
 --
 ALTER TABLE `department`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `department_data`
 --
 ALTER TABLE `department_data`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `failed_jobs`
@@ -373,13 +369,13 @@ ALTER TABLE `failed_jobs`
 -- AUTO_INCREMENT for table `jobs`
 --
 ALTER TABLE `jobs`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `jobs_data`
 --
 ALTER TABLE `jobs_data`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `migrations`
@@ -397,7 +393,7 @@ ALTER TABLE `personal_access_tokens`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- Constraints for dumped tables
@@ -413,19 +409,19 @@ ALTER TABLE `department`
 -- Constraints for table `department_data`
 --
 ALTER TABLE `department_data`
-  ADD CONSTRAINT `department_data_ibfk_1` FOREIGN KEY (`department_id`) REFERENCES `department` (`id`);
+  ADD CONSTRAINT `department_data_ibfk_1` FOREIGN KEY (`department_id`) REFERENCES `department` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `jobs`
 --
 ALTER TABLE `jobs`
-  ADD CONSTRAINT `jobs_ibfk_1` FOREIGN KEY (`department_id`) REFERENCES `department` (`id`);
+  ADD CONSTRAINT `jobs_ibfk_1` FOREIGN KEY (`department_id`) REFERENCES `department` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `jobs_data`
 --
 ALTER TABLE `jobs_data`
-  ADD CONSTRAINT `jobs_data_ibfk_1` FOREIGN KEY (`job_id`) REFERENCES `jobs` (`id`);
+  ADD CONSTRAINT `jobs_data_ibfk_1` FOREIGN KEY (`job_id`) REFERENCES `jobs` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `users`

@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Repositories\DepartmentRepository;
 use App\Http\Requests\DepartmentCreateRequest;
 use App\Models\Department;

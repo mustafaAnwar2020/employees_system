@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\JobController;
 use App\Http\Controllers\DepartmentController;
+use App\Http\Controllers\UserController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -25,3 +26,5 @@ Route::get('/report',[ReportController::class,'index'])
 Route::resource('/jobs',JobController::class)->except(['show']);
 
 Route::resource('/departments',DepartmentController::class)->except(['show']);
+
+Route::resource('/users',UserController::class)->except(['show']);
